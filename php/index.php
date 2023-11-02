@@ -24,5 +24,5 @@ try {
         echo "Aucun utilisateur trouvé.";
     }
 } catch (PDOException $e) {
-    echo "La connexion a échoué : " . $e->getMessage();
+    echo "La connexion a X échoué : " . $e->getMessage();
 }
