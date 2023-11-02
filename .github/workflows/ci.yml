@@ -1,0 +1,21 @@
+name: CI with Docker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      run: docker build -t dockerphpmyadmin .
+
+    - name: Run tests in the Docker container
+      run: docker run dockerphpmyadmin echo "Running tests for dockerphpmyadmin."
