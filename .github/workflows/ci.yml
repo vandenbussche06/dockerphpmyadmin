@@ -1,4 +1,4 @@
-name: CI with Docker
+name: CI avec Docker
 
 on:
   push:
@@ -11,11 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Récupérer le référentiel
       uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        ref: ${{ github.ref }}
 
-    - name: Build the Docker image
+    - name: Configuration de Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Construire l'image Docker
       run: docker build -t dockerphpmyadmin .
 
-    - name: Run tests in the Docker container
-      run: docker run dockerphpmyadmin echo "Running tests for dockerphpmyadmin."
+    - name: Exécuter les tests dans le conteneur Docker
+      run: docker run dockerphpmyadmin echo "Exécution des tests pour dockerphpmyadmin."
